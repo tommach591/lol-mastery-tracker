@@ -1,7 +1,17 @@
 import "./App.css";
+import { Route, Routes } from "react-router-dom";
+import Home from "../Home";
+import Mastery from "../Mastery";
 
 function App() {
-  return <div className="App"></div>;
+  return (
+    <div className="App">
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/mastery/:region/:summonerName" element={<Mastery />} />
+      </Routes>
+    </div>
+  );
 }
 
 export default App;
