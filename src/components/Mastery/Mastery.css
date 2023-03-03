@@ -1,0 +1,69 @@
+.Mastery {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+
+  position: relative;
+  overflow: hidden;
+}
+
+.Header {
+  height: 3rem;
+
+  display: flex;
+  align-items: center;
+
+  border-bottom: 1px solid black;
+}
+
+.Header > * {
+  margin: auto;
+}
+
+.Profile {
+  width: fit-content;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin: 1rem;
+}
+
+.SummonerIcon {
+  width: 4rem;
+
+  border-radius: 50%;
+}
+
+.SummonerName {
+  font-size: 24px;
+  color: white;
+  margin: 1rem;
+}
+
+.ChampionGrid {
+  width: 100%;
+
+  display: grid;
+  grid-template-rows: auto;
+  grid-template-columns: repeat(10, 5rem);
+  gap: 10px;
+
+  align-items: center;
+  justify-content: center;
+
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.ChampionPortrait {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ChampionPortrait > img {
+  width: 100%;
+  height: 100%;
+}

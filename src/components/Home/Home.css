@@ -1,0 +1,16 @@
+.Home {
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  margin: 1rem;
+}
+
+.Title {
+  margin: 1rem;
+
+  font-size: 36px;
+  color: rgb(255, 217, 0);
+}
