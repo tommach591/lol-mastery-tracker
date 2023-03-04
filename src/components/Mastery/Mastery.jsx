@@ -20,19 +20,60 @@ function Mastery({ champions }) {
       setSummonerInfo(res);
       getMastery(region, res.id).then((res) => {
         setSummonerMastery(res);
-
-        console.log(champions);
-        console.log(res);
       });
     });
   }, [region, summonerName, navigate]);
 
   const ChampionIcon = (championId) => {
-    let championName = champions.find(
-      (champ) => parseInt(champ.key) === parseInt(championId)
-    ).id;
+    return <img src={getChampionIcon(championId)} alt="" />;
+  };
 
-    return <img src={getChampionIcon(championName)} alt="" />;
+  const MasteryGrid = () => {
+    const championsByMasteryLevel = {
+      0: [],
+      1: [],
+      2: [],
+      3: [],
+      4: [],
+      5: [],
+      6: [],
+      7: [],
+    };
+
+    for (const c of champions) {
+      let champion = summonerMastery.find(
+        (champ) => parseInt(champ.championId) === parseInt(c.key)
+      );
+
+      if (champion) {
+        championsByMasteryLevel[champion.championLevel].push(c);
+      } else {
+        championsByMasteryLevel[0].push(c);
+      }
+    }
+
+    const ChampionGrids = [];
+
+    for (let i = 7; i >= 0; i--) {
+      if (championsByMasteryLevel[i].length > 0) {
+        ChampionGrids.push(
+          <div className="MasteryLevel">
+            <h1>{i > 0 ? `Mastery Level ${i}` : "Unranked"}</h1>
+            <div className="ChampionGrid">
+              {championsByMasteryLevel[i].map((champion) => {
+                return (
+                  <div className="ChampionPortrait" key={champion.id}>
+                    {ChampionIcon(champion.id)}
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        );
+      }
+    }
+
+    return ChampionGrids;
   };
 
   return summonerMastery ? (
@@ -48,15 +89,7 @@ function Mastery({ champions }) {
         />
         <h1 className="SummonerName">{summonerInfo.name}</h1>
       </div>
-      <div className="ChampionGrid">
-        {summonerMastery.map((champion) => {
-          return (
-            <div className="ChampionPortrait" key={champion.championId}>
-              {ChampionIcon(champion.championId)}
-            </div>
-          );
-        })}
-      </div>
+      {MasteryGrid()}
     </div>
   ) : (
     <div />

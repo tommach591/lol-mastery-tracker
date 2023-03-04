@@ -42,18 +42,35 @@
   margin: 1rem;
 }
 
+.MasteryLevel {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  justify-content: center;
+
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.MasteryLevel > h1 {
+  font-size: 24px;
+  color: rgb(255, 215, 0);
+}
+
 .ChampionGrid {
   width: 100%;
 
   display: grid;
   grid-template-rows: auto;
-  grid-template-columns: repeat(10, 5rem);
+  grid-template-columns: repeat(15, 6rem);
   gap: 10px;
 
   align-items: center;
-  justify-content: center;
+  justify-content: left;
 
-  margin-top: 1rem;
+  margin-top: 0.5rem;
   margin-bottom: 1rem;
 }
 

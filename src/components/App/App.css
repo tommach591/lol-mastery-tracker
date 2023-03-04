@@ -2,6 +2,26 @@ body {
   overflow-x: hidden;
 }
 
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: rgb(50, 50, 60);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgb(100, 100, 110);
+  border-radius: 20px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(80, 80, 90);
+}
+
 .App {
   width: 100vw;
   min-height: 100vh;
@@ -10,3 +30,4 @@ body {
 
   background: rgb(30, 30, 40);
 }
+
