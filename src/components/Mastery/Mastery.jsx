@@ -57,7 +57,7 @@ function Mastery({ champions }) {
     for (let i = 7; i >= 0; i--) {
       if (championsByMasteryLevel[i].length > 0) {
         ChampionGrids.push(
-          <div className="MasteryLevel">
+          <div className="MasteryLevel" key={i}>
             <h1>{i > 0 ? `Mastery Level ${i}` : "Unranked"}</h1>
             <div className="ChampionGrid">
               {championsByMasteryLevel[i].map((champion) => {

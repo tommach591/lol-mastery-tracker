@@ -5,7 +5,7 @@ function Home() {
   return (
     <div className="Home">
       <div className="Title">
-        <h1>LoL Summoner Mastery Dungeon</h1>
+        <h1>LoL Summoner Mastery Database</h1>
       </div>
       <Searchbar />
     </div>
