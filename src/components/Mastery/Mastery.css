@@ -76,11 +76,22 @@
 
 .ChampionPortrait {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+
+  position: relative;
+
+  background: rgb(40, 40, 60);
+  color: white;
 }
 
-.ChampionPortrait > img {
+.Chest {
+  position: absolute;
+  bottom: 1rem;
+  right: 0;
+}
+
+.ChampionIcon {
   width: 100%;
-  height: 100%;
 }

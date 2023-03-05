@@ -1,4 +1,5 @@
 const API_KEY = process.env.REACT_APP_RIOT_API_KEY;
+const version = "13.4.1";
 
 export function getSummoner(region, summonerName) {
   return fetch(
@@ -23,12 +24,12 @@ export function getMastery(region, summonerID) {
 }
 
 export function getProfileIcon(profileIconId) {
-  return `http://ddragon.leagueoflegends.com/cdn/13.4.1/img/profileicon/${profileIconId}.png`;
+  return `http://ddragon.leagueoflegends.com/cdn/${version}/img/profileicon/${profileIconId}.png`;
 }
 
 export function getChampions() {
   return fetch(
-    `http://ddragon.leagueoflegends.com/cdn/13.4.1/data/en_US/champion.json`
+    `http://ddragon.leagueoflegends.com/cdn/${version}/data/en_US/champion.json`
   )
     .then((res) => {
       if (res.ok) return res.json();
@@ -38,5 +39,5 @@ export function getChampions() {
 }
 
 export function getChampionIcon(champion) {
-  return `http://ddragon.leagueoflegends.com/cdn/13.4.1/img/champion/${champion}.png`;
+  return `http://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${champion}.png`;
 }

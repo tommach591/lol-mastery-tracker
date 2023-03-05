@@ -1,6 +1,7 @@
 import "./Mastery.css";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import Chest from "../../assets/chest.png";
 import {
   getMastery,
   getProfileIcon,
@@ -15,8 +16,11 @@ function Mastery({ champions }) {
   const [summonerMastery, setSummonerMastery] = useState();
   const navigate = useNavigate();
 
+  const convertToID = ["Nunu"];
+
   useEffect(() => {
     getSummoner(region, summonerName).then((res) => {
+      if (!res) navigate("/");
       setSummonerInfo(res);
       getMastery(region, res.id).then((res) => {
         setSummonerMastery(res);
@@ -25,7 +29,9 @@ function Mastery({ champions }) {
   }, [region, summonerName, navigate]);
 
   const ChampionIcon = (championId) => {
-    return <img src={getChampionIcon(championId)} alt="" />;
+    return (
+      <img className="ChampionIcon" src={getChampionIcon(championId)} alt="" />
+    );
   };
 
   const MasteryGrid = () => {
@@ -46,9 +52,24 @@ function Mastery({ champions }) {
       );
 
       if (champion) {
-        championsByMasteryLevel[champion.championLevel].push(c);
+        championsByMasteryLevel[champion.championLevel].push(
+          <div className="ChampionPortrait" key={c.id}>
+            {ChampionIcon(c.id)}
+            {champion.chestGranted ? (
+              <img className="Chest" src={Chest} alt="" />
+            ) : (
+              <div />
+            )}
+            <h1>{convertToID.includes(c.id) ? c.id : c.name}</h1>
+          </div>
+        );
       } else {
-        championsByMasteryLevel[0].push(c);
+        championsByMasteryLevel[0].push(
+          <div className="ChampionPortrait" key={c.id}>
+            {ChampionIcon(c.id)}
+            <h1>{convertToID.includes(c.id) ? c.id : c.name}</h1>
+          </div>
+        );
       }
     }
 
@@ -59,15 +80,7 @@ function Mastery({ champions }) {
         ChampionGrids.push(
           <div className="MasteryLevel" key={i}>
             <h1>{i > 0 ? `Mastery Level ${i}` : "Unranked"}</h1>
-            <div className="ChampionGrid">
-              {championsByMasteryLevel[i].map((champion) => {
-                return (
-                  <div className="ChampionPortrait" key={champion.id}>
-                    {ChampionIcon(champion.id)}
-                  </div>
-                );
-              })}
-            </div>
+            <div className="ChampionGrid">{championsByMasteryLevel[i]}</div>
           </div>
         );
       }
