@@ -89,7 +89,9 @@
 .Chest {
   position: absolute;
   bottom: 1rem;
-  right: 0;
+  right: 0rem;
+
+  background: black;
 }
 
 .ChampionIcon {
