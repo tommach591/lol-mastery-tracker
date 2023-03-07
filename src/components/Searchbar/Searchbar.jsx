@@ -23,7 +23,7 @@ function Searchbar() {
     "vn2",
   ];
   const navigate = useNavigate();
-  const [summonerName, setSummonerName] = useState();
+  const [summonerName, setSummonerName] = useState("");
   const [region, setRegion] = useState(regions[0]);
 
   return (
@@ -34,6 +34,7 @@ function Searchbar() {
           getSummoner(region, summonerName).then((res) => {
             if (res) {
               navigate(`/mastery/${region}/${summonerName}`);
+              setSummonerName("");
             } else {
               alert("Summoner not found!");
             }
@@ -59,6 +60,7 @@ function Searchbar() {
             setSummonerName(event.currentTarget.value);
           }}
           placeholder="Summoner name..."
+          value={summonerName}
         />
         <button type="submit">Submit</button>
       </form>
