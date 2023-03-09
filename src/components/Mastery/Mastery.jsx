@@ -1,19 +1,18 @@
 import "./Mastery.css";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import Chest from "../../assets/chest.png";
 import Logo from "../../assets/logo.png";
 import {
   getMastery,
   getProfileIcon,
   getSummoner,
-  getChampionIcon,
   getMasteryScore,
   getPlayerChallenges,
   getMasterYourself,
   getTier,
 } from "../../utils/League";
 import Searchbar from "../Searchbar";
+import ChampionPortrait from "../ChampionPortrait";
 
 function Mastery({ champions }) {
   const { region, summonerName } = useParams();
@@ -24,7 +23,6 @@ function Mastery({ champions }) {
   const [masteryScore, setMasteryScore] = useState(0);
   const navigate = useNavigate();
 
-  const convertToID = ["Nunu"];
   const challengeID = 401104;
 
   const nextTier = {
@@ -34,9 +32,7 @@ function Mastery({ champions }) {
     GOLD: "PLATINUM",
     PLATINUM: "DIAMOND",
     DIAMOND: "MASTER",
-    MASTER: "GRANDMASTER",
-    GRANDMASTER: "CHALLENGER",
-    CHALLENGER: "CHALLENGER",
+    MASTER: "MASTER",
   };
 
   useEffect(() => {
@@ -50,25 +46,15 @@ function Mastery({ champions }) {
         setSummonerMastery(res);
       });
       getMasterYourself(region).then((res) => {
-        console.log(res);
         setMasterYourself(res);
       });
       getPlayerChallenges(region, res.puuid).then((res) => {
-        console.log(
-          res.challenges.find((obj) => obj.challengeId === challengeID)
-        );
         setSummonerChallenge(
           res.challenges.find((obj) => obj.challengeId === challengeID)
         );
       });
     });
   }, [region, summonerName, navigate]);
-
-  const ChampionIcon = (championId) => {
-    return (
-      <img className="ChampionIcon" src={getChampionIcon(championId)} alt="" />
-    );
-  };
 
   const MasteryGrid = () => {
     const championsByMasteryLevel = {
@@ -89,22 +75,19 @@ function Mastery({ champions }) {
 
       if (champion) {
         championsByMasteryLevel[champion.championLevel].push(
-          <div className="ChampionPortrait" key={c.id}>
-            {ChampionIcon(c.id)}
-            {champion.chestGranted ? (
-              <img className="Chest" src={Chest} alt="" />
-            ) : (
-              <div />
-            )}
-            <h1>{convertToID.includes(c.id) ? c.id : c.name}</h1>
-          </div>
+          <ChampionPortrait
+            key={c.id}
+            championInfo={c}
+            championMastery={champion}
+          />
         );
       } else {
         championsByMasteryLevel[0].push(
-          <div className="ChampionPortrait" key={c.id}>
-            {ChampionIcon(c.id)}
-            <h1>{convertToID.includes(c.id) ? c.id : c.name}</h1>
-          </div>
+          <ChampionPortrait
+            key={c.id}
+            championInfo={c}
+            championMastery={champion}
+          />
         );
       }
     }
@@ -115,7 +98,7 @@ function Mastery({ champions }) {
       if (championsByMasteryLevel[i].length > 0) {
         ChampionGrids.push(
           <div className="MasteryLevel" key={i}>
-            <h1>{i > 0 ? `Mastery Level ${i}` : "Unranked"}</h1>
+            <h1>{i > 0 ? `Mastery Level ${i}` : `Unranked`}</h1>
             <div className="ChampionGrid">{championsByMasteryLevel[i]}</div>
           </div>
         );

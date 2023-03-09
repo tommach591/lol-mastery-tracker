@@ -1,0 +1,40 @@
+.MasteryPopup {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  position: absolute;
+  z-index: 1;
+
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  background: rgba(0, 0, 0, 0.85);
+
+  border-radius: 10px;
+}
+
+.MasteryIcon {
+  width: 2.5rem;
+  margin-top: 0.1rem;
+  margin-bottom: 0.1rem;
+  margin-right: 0.25rem;
+}
+
+.Mini {
+  width: 10rem;
+  height: 0.75rem;
+
+  background: black;
+}
+
+.Mini > h1 {
+  font-size: 11px;
+}
+
+.Mini > div {
+  background-image: linear-gradient(
+    to right,
+    rgb(70, 65, 40),
+    rgb(167, 142, 0)
+  );
+}
