@@ -62,7 +62,12 @@ function Searchbar() {
           placeholder="Summoner name..."
           value={summonerName}
         />
-        <button type="submit">Submit</button>
+        <button type="search">
+          <img
+            src="https://api.iconify.design/ph:magnifying-glass-bold.svg?color=%23323232"
+            alt=""
+          />
+        </button>
       </form>
     </div>
   );

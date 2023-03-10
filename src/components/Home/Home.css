@@ -12,5 +12,12 @@
   margin: 1rem;
 
   font-size: 36px;
+  text-align: center;
   color: rgb(255, 215, 0);
+}
+
+@media (max-width: 1024px) {
+  .Title {
+    font-size: 32px;
+  }
 }

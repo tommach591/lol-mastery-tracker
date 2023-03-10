@@ -29,3 +29,14 @@
 .ChampionIcon {
   width: 100%;
 }
+
+@media (max-width: 1024px) {
+  .ChampionPortrait {
+    font-size: 8px;
+  }
+
+  .Chest {
+    bottom: 0.5rem;
+    width: 25%;
+  }
+}

@@ -33,6 +33,7 @@ function Mastery({ champions }) {
     PLATINUM: "DIAMOND",
     DIAMOND: "MASTER",
     MASTER: "MASTER",
+    NONE: "MASTER",
   };
 
   useEffect(() => {

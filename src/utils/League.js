@@ -106,6 +106,6 @@ export function getTier(level) {
     case "CHALLENGER":
       return Challenger;
     default:
-      return "";
+      return Iron;
   }
 }

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useMobile } from "../../utils/useMobile";
 import "./MasteryPopup.css";
 import MasteryIconDefault from "../../assets/mastery_icon_default.png";
 import MasteryIcon4 from "../../assets/mastery_icon_4.png";
@@ -8,6 +9,7 @@ import MasteryIcon7 from "../../assets/mastery_icon_7.png";
 
 function MasteryPopup({ champion, popupOn }) {
   const [mousePos, setMousePos] = useState({});
+  const isMobile = useMobile();
 
   const getMasteryIcon = () => {
     switch (champion.championLevel) {
@@ -25,7 +27,7 @@ function MasteryPopup({ champion, popupOn }) {
   };
 
   useEffect(() => {
-    const offset = { x: 10, y: 0 };
+    const offset = isMobile ? { x: -65, y: 20 } : { x: 10, y: 0 };
 
     const handleMouseMove = (event) => {
       let bounds = event.target.getBoundingClientRect();
@@ -40,7 +42,7 @@ function MasteryPopup({ champion, popupOn }) {
     return () => {
       window.removeEventListener("mousemove", handleMouseMove);
     };
-  }, []);
+  }, [isMobile]);
 
   return popupOn ? (
     <div className="MasteryPopup" style={{ top: mousePos.y, left: mousePos.x }}>

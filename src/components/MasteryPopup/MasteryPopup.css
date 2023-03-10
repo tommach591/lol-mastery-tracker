@@ -38,3 +38,21 @@
     rgb(167, 142, 0)
   );
 }
+
+@media (max-width: 1024px) {
+  .MasteryIcon {
+    width: 1.75rem;
+    margin-top: 0.1rem;
+    margin-bottom: 0.1rem;
+    margin-right: 0.25rem;
+  }
+
+  .Mini {
+    width: 5rem;
+    height: 0.5rem;
+  }
+
+  .Mini > h1 {
+    font-size: 8px;
+  }
+}
