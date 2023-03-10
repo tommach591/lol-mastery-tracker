@@ -1,4 +1,4 @@
-League of Legends Summoner Mastery Database
+LoL Mastery Tracker
 
 Setup:
 
