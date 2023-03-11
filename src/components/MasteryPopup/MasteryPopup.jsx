@@ -26,6 +26,24 @@ function MasteryPopup({ champion, popupOn }) {
     }
   };
 
+  const getTokens = () => {
+    const tokens = [];
+
+    if (champion.championLevel === 5 || champion.championLevel === 6) {
+      const tokensNeeded = champion.championLevel === 5 ? 2 : 3;
+      for (let i = 0; i < tokensNeeded; i++) {
+        tokens.push(
+          <div
+            key={i}
+            className={i < champion.tokensEarned ? "Tokens Filled" : "Tokens"}
+          />
+        );
+      }
+    }
+
+    return tokens;
+  };
+
   useEffect(() => {
     const offset = isMobile ? { x: -65, y: 20 } : { x: 10, y: 0 };
 
@@ -71,6 +89,7 @@ function MasteryPopup({ champion, popupOn }) {
             <h1>{`${champion.championPoints.toLocaleString()}`}</h1>
           )}
         </div>
+        <div className="TokensEarned">{getTokens()}</div>
       </div>
     </div>
   ) : (

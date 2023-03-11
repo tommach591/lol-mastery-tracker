@@ -14,21 +14,43 @@
 }
 
 .MasteryIcon {
-  width: 2.5rem;
-  margin-top: 0.1rem;
-  margin-bottom: 0.1rem;
-  margin-right: 0.25rem;
+  width: 2.75rem;
+  margin: 0.25rem;
+  margin-left: 0rem;
 }
 
 .Mini {
   width: 10rem;
   height: 0.75rem;
 
+  margin-top: 0.25rem;
+
   background: black;
 }
 
 .Mini > h1 {
-  font-size: 11px;
+  font-size: 10px;
+}
+
+.TokensEarned {
+  display: flex;
+  margin-top: 0.25rem;
+}
+
+.Tokens {
+  width: 0.5rem;
+  height: 0.5rem;
+
+  margin-left: 0.1rem;
+  margin-right: 0.1rem;
+
+  border: 1px solid white;
+  border-radius: 50%;
+  background: black;
+}
+
+.Filled {
+  background: rgb(255, 215, 0);
 }
 
 .Mini > div {
@@ -42,17 +64,31 @@
 @media (max-width: 1024px) {
   .MasteryIcon {
     width: 1.75rem;
-    margin-top: 0.1rem;
-    margin-bottom: 0.1rem;
+    margin-top: 0.2rem;
+    margin-bottom: 0.2rem;
     margin-right: 0.25rem;
   }
 
   .Mini {
     width: 5rem;
     height: 0.5rem;
+
+    margin-top: 0.05rem;
   }
 
   .Mini > h1 {
     font-size: 8px;
+  }
+
+  .TokensEarned {
+    margin-top: 0.05rem;
+  }
+
+  .Tokens {
+    width: 0.25rem;
+    height: 0.25rem;
+
+    margin-left: 0.05rem;
+    margin-right: 0.05rem;
   }
 }
