@@ -67,12 +67,12 @@ export function getPlayerChallenges(region, puuid) {
 }
 
 export function getProfileIcon(profileIconId) {
-  return `http://ddragon.leagueoflegends.com/cdn/${version}/img/profileicon/${profileIconId}.png`;
+  return `https://ddragon.leagueoflegends.com/cdn/${version}/img/profileicon/${profileIconId}.png`;
 }
 
 export function getChampions() {
   return fetch(
-    `http://ddragon.leagueoflegends.com/cdn/${version}/data/en_US/champion.json`
+    `https://ddragon.leagueoflegends.com/cdn/${version}/data/en_US/champion.json`
   )
     .then((res) => {
       if (res.ok) return res.json();
@@ -82,7 +82,7 @@ export function getChampions() {
 }
 
 export function getChampionIcon(champion) {
-  return `http://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${champion}.png`;
+  return `https://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${champion}.png`;
 }
 
 export function getTier(level) {
