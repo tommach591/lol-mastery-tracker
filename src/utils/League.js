@@ -8,12 +8,12 @@ import Master from "../assets/master.png";
 import Grandmaster from "../assets/grandmaster.png";
 import Challenger from "../assets/challenger.png";
 
-const API_KEY = process.env.REACT_APP_RIOT_API_KEY;
+const getAPIKey = () => process.env.REACT_APP_RIOT_API_KEY;
 const version = "13.4.1";
 
 export function getSummoner(region, summonerName) {
   return fetch(
-    `https://${region}.api.riotgames.com/lol/summoner/v4/summoners/by-name/${summonerName}?api_key=${API_KEY}`
+    `https://${region}.api.riotgames.com/lol/summoner/v4/summoners/by-name/${summonerName}?api_key=${getAPIKey()}`
   )
     .then((res) => {
       if (res.ok) return res.json();
@@ -24,7 +24,7 @@ export function getSummoner(region, summonerName) {
 
 export function getMastery(region, summonerID) {
   return fetch(
-    `https://${region}.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-summoner/${summonerID}?api_key=${API_KEY}`
+    `https://${region}.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-summoner/${summonerID}?api_key=${getAPIKey()}`
   )
     .then((res) => {
       if (res.ok) return res.json();
@@ -35,7 +35,7 @@ export function getMastery(region, summonerID) {
 
 export function getMasteryScore(region, summonerID) {
   return fetch(
-    `https://${region}.api.riotgames.com/lol/champion-mastery/v4/scores/by-summoner/${summonerID}?api_key=${API_KEY}`
+    `https://${region}.api.riotgames.com/lol/champion-mastery/v4/scores/by-summoner/${summonerID}?api_key=${getAPIKey()}`
   )
     .then((res) => {
       if (res.ok) return res.json();
@@ -46,7 +46,7 @@ export function getMasteryScore(region, summonerID) {
 
 export function getMasterYourself(region) {
   return fetch(
-    `https://${region}.api.riotgames.com/lol/challenges/v1/challenges/401104/config?api_key=${API_KEY}`
+    `https://${region}.api.riotgames.com/lol/challenges/v1/challenges/401104/config?api_key=${getAPIKey()}`
   )
     .then((res) => {
       if (res.ok) return res.json();
@@ -57,7 +57,7 @@ export function getMasterYourself(region) {
 
 export function getPlayerChallenges(region, puuid) {
   return fetch(
-    `https://${region}.api.riotgames.com/lol/challenges/v1/player-data/${puuid}?api_key=${API_KEY}`
+    `https://${region}.api.riotgames.com/lol/challenges/v1/player-data/${puuid}?api_key=${getAPIKey()}`
   )
     .then((res) => {
       if (res.ok) return res.json();
