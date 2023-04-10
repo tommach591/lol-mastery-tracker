@@ -14,7 +14,7 @@ import {
 import Searchbar from "../Searchbar";
 import ChampionPortrait from "../ChampionPortrait";
 
-function Mastery({ champions }) {
+function Mastery({ champions, version }) {
   const { region, summonerName } = useParams();
   const [summonerInfo, setSummonerInfo] = useState();
   const [summonerMastery, setSummonerMastery] = useState();
@@ -78,6 +78,7 @@ function Mastery({ champions }) {
         championsByMasteryLevel[champion.championLevel].push(
           <ChampionPortrait
             key={c.id}
+            version={version}
             championInfo={c}
             championMastery={champion}
           />
@@ -127,7 +128,7 @@ function Mastery({ champions }) {
           <div className="SummonerIconContainer">
             <img
               className="SummonerIcon"
-              src={getProfileIcon(summonerInfo.profileIconId)}
+              src={getProfileIcon(version, summonerInfo.profileIconId)}
               alt=""
             />
             <h1 className="SummonerLevel">{summonerInfo.summonerLevel}</h1>

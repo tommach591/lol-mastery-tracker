@@ -4,14 +4,14 @@ import { getChampionIcon } from "../../utils/League";
 import { useState } from "react";
 import MasteryPopup from "../MasteryPopup/MasteryPopup";
 
-function ChampionPortrait({ championInfo, championMastery }) {
+function ChampionPortrait({ version, championInfo, championMastery }) {
   const [popupOn, setPopupOn] = useState(false);
 
   const ChampionIcon = (championId) => {
     return (
       <img
         className="ChampionIcon"
-        src={getChampionIcon(championId)}
+        src={getChampionIcon(version, championId)}
         alt=""
         onMouseEnter={() => {
           setPopupOn(true);

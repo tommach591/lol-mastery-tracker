@@ -9,7 +9,6 @@ import Grandmaster from "../assets/grandmaster.png";
 import Challenger from "../assets/challenger.png";
 
 const API_KEY = process.env.REACT_APP_RIOT_API_KEY;
-const version = "13.7.1";
 
 export function getSummoner(region, summonerName) {
   return fetch(
@@ -66,11 +65,20 @@ export function getPlayerChallenges(region, puuid) {
     .catch((err) => console.error(err));
 }
 
-export function getProfileIcon(profileIconId) {
+export function getVersion() {
+  return fetch(`https://ddragon.leagueoflegends.com/api/versions.json`)
+    .then((res) => {
+      if (res.ok) return res.json();
+      else return;
+    })
+    .catch((err) => console.error(err));
+}
+
+export function getProfileIcon(version, profileIconId) {
   return `https://ddragon.leagueoflegends.com/cdn/${version}/img/profileicon/${profileIconId}.png`;
 }
 
-export function getChampions() {
+export function getChampions(version) {
   return fetch(
     `https://ddragon.leagueoflegends.com/cdn/${version}/data/en_US/champion.json`
   )
@@ -81,7 +89,7 @@ export function getChampions() {
     .catch((err) => console.error(err));
 }
 
-export function getChampionIcon(champion) {
+export function getChampionIcon(version, champion) {
   return `https://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${champion}.png`;
 }
 

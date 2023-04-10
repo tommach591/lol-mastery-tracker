@@ -3,14 +3,18 @@ import { Route, Routes } from "react-router-dom";
 import Home from "../Home";
 import Mastery from "../Mastery";
 import { useEffect, useState } from "react";
-import { getChampions } from "../../utils/League";
+import { getChampions, getVersion } from "../../utils/League";
 
 function App() {
   const [champions, setChampions] = useState();
+  const [version, setVersion] = useState();
 
   useEffect(() => {
-    getChampions().then((res) => {
-      setChampions(Object.values(res.data));
+    getVersion().then((res) => {
+      setVersion(res[0]);
+      getChampions(res[0]).then((res) => {
+        setChampions(Object.values(res.data));
+      });
     });
   }, []);
 
@@ -20,7 +24,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route
           path="/mastery/:region/:summonerName"
-          element={<Mastery champions={champions} />}
+          element={<Mastery champions={champions} version={version} />}
         />
       </Routes>
     </div>
