@@ -9,7 +9,7 @@ import Grandmaster from "../assets/grandmaster.png";
 import Challenger from "../assets/challenger.png";
 
 const API_KEY = process.env.REACT_APP_RIOT_API_KEY;
-const version = "13.4.1";
+const version = "13.7.1";
 
 export function getSummoner(region, summonerName) {
   return fetch(
