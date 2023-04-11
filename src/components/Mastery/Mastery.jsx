@@ -87,6 +87,7 @@ function Mastery({ champions, version }) {
         championsByMasteryLevel[0].push(
           <ChampionPortrait
             key={c.id}
+            version={version}
             championInfo={c}
             championMastery={champion}
           />
