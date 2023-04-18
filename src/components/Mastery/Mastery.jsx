@@ -13,8 +13,12 @@ import {
 } from "../../utils/League";
 import Searchbar from "../Searchbar";
 import ChampionPortrait from "../ChampionPortrait";
+import { useChampion, useVersion } from "../../utils/ChampionContext";
 
-function Mastery({ champions, version }) {
+function Mastery() {
+  const champions = useChampion();
+  const version = useVersion();
+
   const { region, summonerName } = useParams();
   const [summonerInfo, setSummonerInfo] = useState();
   const [summonerMastery, setSummonerMastery] = useState();
