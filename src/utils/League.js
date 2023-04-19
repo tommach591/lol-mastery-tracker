@@ -8,12 +8,10 @@ import Master from "../assets/master.png";
 import Grandmaster from "../assets/grandmaster.png";
 import Challenger from "../assets/challenger.png";
 
-const API_KEY = process.env.REACT_APP_RIOT_API_KEY;
+const SERVER_URL = "https://lol-mastery-tracker.herokuapp.com/";
 
 export function getSummoner(region, summonerName) {
-  return fetch(
-    `https://${region}.api.riotgames.com/lol/summoner/v4/summoners/by-name/${summonerName}?api_key=${API_KEY}`
-  )
+  return fetch(`${SERVER_URL}api/League/summoner/${region}/${summonerName}`)
     .then((res) => {
       if (res.ok) return res.json();
       else return;
@@ -22,9 +20,7 @@ export function getSummoner(region, summonerName) {
 }
 
 export function getMastery(region, summonerID) {
-  return fetch(
-    `https://${region}.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-summoner/${summonerID}?api_key=${API_KEY}`
-  )
+  return fetch(`${SERVER_URL}api/League/mastery/${region}/${summonerID}`)
     .then((res) => {
       if (res.ok) return res.json();
       else return;
@@ -33,9 +29,7 @@ export function getMastery(region, summonerID) {
 }
 
 export function getMasteryScore(region, summonerID) {
-  return fetch(
-    `https://${region}.api.riotgames.com/lol/champion-mastery/v4/scores/by-summoner/${summonerID}?api_key=${API_KEY}`
-  )
+  return fetch(`${SERVER_URL}api/League/score/${region}/${summonerID}`)
     .then((res) => {
       if (res.ok) return res.json();
       else return;
@@ -44,9 +38,7 @@ export function getMasteryScore(region, summonerID) {
 }
 
 export function getMasterYourself(region) {
-  return fetch(
-    `https://${region}.api.riotgames.com/lol/challenges/v1/challenges/401104/config?api_key=${API_KEY}`
-  )
+  return fetch(`${SERVER_URL}api/League/mission/${region}`)
     .then((res) => {
       if (res.ok) return res.json();
       else return;
@@ -55,9 +47,7 @@ export function getMasterYourself(region) {
 }
 
 export function getPlayerChallenges(region, puuid) {
-  return fetch(
-    `https://${region}.api.riotgames.com/lol/challenges/v1/player-data/${puuid}?api_key=${API_KEY}`
-  )
+  return fetch(`${SERVER_URL}api/League/challenges/${region}/${puuid}`)
     .then((res) => {
       if (res.ok) return res.json();
       else return;

@@ -43,17 +43,22 @@ function Mastery() {
   useEffect(() => {
     getSummoner(region, summonerName).then((res) => {
       if (!res) navigate("/");
+      res = JSON.parse(res);
       setSummonerInfo(res);
       getMasteryScore(region, res.id).then((res) => {
+        res = JSON.parse(res);
         setMasteryScore(res);
       });
       getMastery(region, res.id).then((res) => {
+        res = JSON.parse(res);
         setSummonerMastery(res);
       });
       getMasterYourself(region).then((res) => {
+        res = JSON.parse(res);
         setMasterYourself(res);
       });
       getPlayerChallenges(region, res.puuid).then((res) => {
+        res = JSON.parse(res);
         setSummonerChallenge(
           res.challenges.find((obj) => obj.challengeId === challengeID)
         );
