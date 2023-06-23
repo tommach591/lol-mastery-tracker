@@ -17,7 +17,12 @@ function App() {
       </Routes>
     </div>
   ) : (
-    <div />
+    <div className="Loading">
+      <img
+        src="https://gifdb.com/images/high/league-of-legends-shamrock-skin-malphite-czwhw8bgpbfd6o1a.gif"
+        alt="Loading..."
+      />
+    </div>
   );
 }
 

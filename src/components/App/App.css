@@ -36,3 +36,16 @@ body {
   color: white;
 }
 
+.Loading {
+  width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+
+  background: rgb(30, 30, 40);
+}
+
+.Loading > img {
+  height: fit-content;
+}
+
