@@ -55,6 +55,15 @@ export function getPlayerChallenges(region, puuid) {
     .catch((err) => console.error(err));
 }
 
+export function getChampionRotations(server) {
+  return fetch(`${SERVER_URL}api/League/rotations/${server}`)
+    .then((res) => {
+      if (res.ok) return res.json();
+      else return;
+    })
+    .catch((err) => console.error(err));
+}
+
 export function getVersion() {
   return fetch(`https://ddragon.leagueoflegends.com/api/versions.json`)
     .then((res) => {

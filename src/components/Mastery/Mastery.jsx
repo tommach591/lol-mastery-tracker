@@ -10,6 +10,7 @@ import {
   getPlayerChallenges,
   getMasterYourself,
   getTier,
+  getChampionRotations,
 } from "../../utils/League";
 import Searchbar from "../Searchbar";
 import ChampionPortrait from "../ChampionPortrait";
@@ -25,6 +26,7 @@ function Mastery() {
   const [summonerChallenge, setSummonerChallenge] = useState();
   const [masterYourself, setMasterYourself] = useState();
   const [masteryScore, setMasteryScore] = useState(0);
+  const [rotations, setRotations] = useState();
   const navigate = useNavigate();
 
   const challengeID = 401104;
@@ -63,6 +65,10 @@ function Mastery() {
           res.challenges.find((obj) => obj.challengeId === challengeID)
         );
       });
+      getChampionRotations(region).then((res) => {
+        res = JSON.parse(res);
+        setRotations(res);
+      });
     });
   }, [region, summonerName, navigate]);
 
@@ -90,6 +96,7 @@ function Mastery() {
             version={version}
             championInfo={c}
             championMastery={champion}
+            isFree={rotations.freeChampionIds.includes(parseInt(c.key))}
           />
         );
       } else {
@@ -99,6 +106,7 @@ function Mastery() {
             version={version}
             championInfo={c}
             championMastery={champion}
+            isFree={rotations.freeChampionIds.includes(parseInt(c.key))}
           />
         );
       }

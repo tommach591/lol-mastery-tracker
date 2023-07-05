@@ -26,6 +26,13 @@
   background: black;
 }
 
+.F2P {
+  width: 25%;
+  position: absolute;
+  top: 0.1rem;
+  left: 0rem;
+}
+
 .ChampionIcon {
   width: 100%;
 }
@@ -37,6 +44,10 @@
 
   .Chest {
     bottom: 0.5rem;
+    width: 25%;
+  }
+
+  .F2P {
     width: 25%;
   }
 }

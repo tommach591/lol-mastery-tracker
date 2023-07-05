@@ -4,7 +4,7 @@ import { getChampionIcon } from "../../utils/League";
 import { useState } from "react";
 import MasteryPopup from "../MasteryPopup/MasteryPopup";
 
-function ChampionPortrait({ version, championInfo, championMastery }) {
+function ChampionPortrait({ version, championInfo, championMastery, isFree }) {
   const [popupOn, setPopupOn] = useState(false);
 
   const ChampionIcon = (championId) => {
@@ -32,11 +32,21 @@ function ChampionPortrait({ version, championInfo, championMastery }) {
       ) : (
         <div />
       )}
+      {isFree ? (
+        <img
+          className="F2P"
+          src="https://api.iconify.design/material-symbols:lock-open.svg?color=%23f5b90f"
+          alt=""
+        />
+      ) : (
+        <div />
+      )}
       <h1>{championInfo.name}</h1>
     </div>
   ) : (
     <div className="ChampionPortrait">
       {ChampionIcon(championInfo.id)}
+      {isFree ? <h1 className="F2P">F2P</h1> : <div />}
       <h1>{championInfo.name}</h1>
     </div>
   );
