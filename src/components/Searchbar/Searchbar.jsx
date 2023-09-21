@@ -1,7 +1,13 @@
 import "./Searchbar.css";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
 import { getSummoner } from "../../utils/League";
+import {
+  useRegion,
+  useSetRegion,
+  useSetSummoner,
+  useSummoner,
+} from "../../utils/PlayerContext";
+import { useCallback } from "react";
 
 function Searchbar() {
   const regions = [
@@ -22,23 +28,31 @@ function Searchbar() {
     "tw2",
     "vn2",
   ];
+
   const navigate = useNavigate();
-  const [summonerName, setSummonerName] = useState("");
-  const [region, setRegion] = useState(regions[0]);
+  const summonerName = useSummoner();
+  const setSummonerName = useSetSummoner();
+  const region = useRegion();
+  const setRegion = useSetRegion();
+
+  const handleSubmit = useCallback(() => {
+    getSummoner(region, summonerName).then((res) => {
+      const msg = JSON.parse(res);
+      if (!msg.status) {
+        navigate(`/mastery/${region}/${summonerName}`);
+        setSummonerName("");
+      } else {
+        alert("Summoner not found!");
+      }
+    });
+  }, [region, summonerName, setSummonerName, navigate]);
 
   return (
     <div className="Searchbar">
       <form
         onSubmit={(event) => {
           event.preventDefault();
-          getSummoner(region, summonerName).then((res) => {
-            if (res) {
-              navigate(`/mastery/${region}/${summonerName}`);
-              setSummonerName("");
-            } else {
-              alert("Summoner not found!");
-            }
-          });
+          handleSubmit();
         }}
       >
         <select

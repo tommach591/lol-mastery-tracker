@@ -46,7 +46,15 @@ function ChampionPortrait({ version, championInfo, championMastery, isFree }) {
   ) : (
     <div className="ChampionPortrait">
       {ChampionIcon(championInfo.id)}
-      {isFree ? <h1 className="F2P">F2P</h1> : <div />}
+      {isFree ? (
+        <img
+          className="F2P"
+          src="https://api.iconify.design/material-symbols:lock-open.svg?color=%23f5b90f"
+          alt=""
+        />
+      ) : (
+        <div />
+      )}
       <h1>{championInfo.name}</h1>
     </div>
   );

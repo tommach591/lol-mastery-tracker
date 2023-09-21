@@ -10,23 +10,24 @@ import {
   getPlayerChallenges,
   getMasterYourself,
   getTier,
-  getChampionRotations,
 } from "../../utils/League";
 import Searchbar from "../Searchbar";
 import ChampionPortrait from "../ChampionPortrait";
 import { useChampion, useVersion } from "../../utils/ChampionContext";
+import { useRotations } from "../../utils/PlayerContext";
 
 function Mastery() {
   const champions = useChampion();
   const version = useVersion();
 
   const { region, summonerName } = useParams();
+  const rotations = useRotations();
   const [summonerInfo, setSummonerInfo] = useState();
   const [summonerMastery, setSummonerMastery] = useState();
   const [summonerChallenge, setSummonerChallenge] = useState();
   const [masterYourself, setMasterYourself] = useState();
   const [masteryScore, setMasteryScore] = useState(0);
-  const [rotations, setRotations] = useState();
+
   const navigate = useNavigate();
 
   const challengeID = 401104;
@@ -44,8 +45,8 @@ function Mastery() {
 
   useEffect(() => {
     getSummoner(region, summonerName).then((res) => {
-      if (!res) navigate("/");
       res = JSON.parse(res);
+      if (res.status) navigate("/");
       setSummonerInfo(res);
       getMasteryScore(region, res.id).then((res) => {
         res = JSON.parse(res);
@@ -64,10 +65,6 @@ function Mastery() {
         setSummonerChallenge(
           res.challenges.find((obj) => obj.challengeId === challengeID)
         );
-      });
-      getChampionRotations(region).then((res) => {
-        res = JSON.parse(res);
-        setRotations(res);
       });
     });
   }, [region, summonerName, navigate]);
@@ -105,7 +102,6 @@ function Mastery() {
             key={c.id}
             version={version}
             championInfo={c}
-            championMastery={champion}
             isFree={rotations.freeChampionIds.includes(parseInt(c.key))}
           />
         );
