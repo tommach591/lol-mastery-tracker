@@ -33,6 +33,29 @@
   color: rgb(255, 215, 0);
 }
 
+.ErrorMsg {
+  margin-top: 1rem;
+  color: red;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.ErrorMsg > h1 {
+  font-size: 24px;
+}
+
+.ErrorMsg > h2 {
+  font-size: 18px;
+  margin-top: 0.5rem;
+}
+
+.Pain {
+  margin-top: 1rem;
+  width: 7rem;
+}
+
 @media (max-width: 1024px) {
   .Title {
     font-size: 32px;
