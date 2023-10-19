@@ -12,8 +12,6 @@ function Home() {
   const ChampionRotations = () => {
     const championRotations = [];
 
-    console.log(rotations.status);
-
     for (const c of champions) {
       const isFree = rotations.freeChampionIds.includes(parseInt(c.key));
       if (isFree) {

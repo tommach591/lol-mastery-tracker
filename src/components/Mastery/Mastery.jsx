@@ -46,26 +46,36 @@ function Mastery() {
   useEffect(() => {
     getSummoner(region, summonerName).then((res) => {
       res = JSON.parse(res);
-      if (res.status) navigate("/");
+      if (res.status) {
+        navigate("/");
+      }
       setSummonerInfo(res);
-      getMasteryScore(region, res.id).then((res) => {
+      getMasteryScore(region, res.puuid).then((res) => {
         res = JSON.parse(res);
-        if (res.status) navigate("/");
+        if (res.status) {
+          navigate("/");
+        }
         setMasteryScore(res);
       });
       getMastery(region, res.id).then((res) => {
         res = JSON.parse(res);
-        if (res.status) navigate("/");
+        if (res.status) {
+          navigate("/");
+        }
         setSummonerMastery(res);
       });
       getMasterYourself(region).then((res) => {
         res = JSON.parse(res);
-        if (res.status) navigate("/");
+        if (res.status) {
+          navigate("/");
+        }
         setMasterYourself(res);
       });
       getPlayerChallenges(region, res.puuid).then((res) => {
         res = JSON.parse(res);
-        if (res.status) navigate("/");
+        if (res.status) {
+          navigate("/");
+        }
         if (res.challenges)
           setSummonerChallenge(
             res.challenges.find((obj) => obj.challengeId === challengeID)
