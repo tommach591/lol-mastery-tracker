@@ -17,6 +17,16 @@ export function useSetSummoner() {
   return useContext(SetSummonerContext);
 }
 
+const TagContext = createContext();
+export function useTag() {
+  return useContext(TagContext);
+}
+
+const SetTagContext = createContext();
+export function useSetTag() {
+  return useContext(SetTagContext);
+}
+
 const RegionContext = createContext();
 export function useRegion() {
   return useContext(RegionContext);
@@ -51,15 +61,23 @@ export function PlayerProvider({ children }) {
     "tw2",
     "vn2",
   ];
-  const [summonerName, setSummonerName] = useState("");
+  const [username, setUsername] = useState("");
+  const [tag, setTag] = useState("");
   const [region, setRegion] = useState(regions[0]);
   const [rotations, setRotations] = useState();
 
-  const updateSummonerName = useCallback(
-    (newSummonerName) => {
-      if (summonerName !== newSummonerName) setSummonerName(newSummonerName);
+  const updateUsername = useCallback(
+    (newUsername) => {
+      if (username !== newUsername) setUsername(newUsername);
     },
-    [summonerName]
+    [username]
+  );
+
+  const updateTag = useCallback(
+    (newTag) => {
+      if (tag !== newTag) setTag(newTag);
+    },
+    [tag]
   );
 
   const updateRegion = useCallback(
@@ -77,15 +95,19 @@ export function PlayerProvider({ children }) {
   }, [region]);
 
   return (
-    <SummonerContext.Provider value={summonerName}>
-      <SetSummonerContext.Provider value={updateSummonerName}>
-        <RegionContext.Provider value={region}>
-          <SetRegionContext.Provider value={updateRegion}>
-            <RotationsContext.Provider value={rotations}>
-              {children}
-            </RotationsContext.Provider>
-          </SetRegionContext.Provider>
-        </RegionContext.Provider>
+    <SummonerContext.Provider value={username}>
+      <SetSummonerContext.Provider value={updateUsername}>
+        <TagContext.Provider value={tag}>
+          <SetTagContext.Provider value={updateTag}>
+            <RegionContext.Provider value={region}>
+              <SetRegionContext.Provider value={updateRegion}>
+                <RotationsContext.Provider value={rotations}>
+                  {children}
+                </RotationsContext.Provider>
+              </SetRegionContext.Provider>
+            </RegionContext.Provider>
+          </SetTagContext.Provider>
+        </TagContext.Provider>
       </SetSummonerContext.Provider>
     </SummonerContext.Provider>
   );

@@ -5,11 +5,12 @@ import Logo from "../../assets/logo.png";
 import {
   getMastery,
   getProfileIcon,
-  getSummoner,
+  getAccount,
   getMasteryScore,
   getPlayerChallenges,
   getMasterYourself,
   getTier,
+  getSummoner,
 } from "../../utils/League";
 import Searchbar from "../Searchbar";
 import ChampionPortrait from "../ChampionPortrait";
@@ -20,7 +21,7 @@ function Mastery() {
   const champions = useChampion();
   const version = useVersion();
 
-  const { region, summonerName } = useParams();
+  const { region, username, tag } = useParams();
   const rotations = useRotations();
   const [summonerInfo, setSummonerInfo] = useState();
   const [summonerMastery, setSummonerMastery] = useState();
@@ -44,36 +45,39 @@ function Mastery() {
   };
 
   useEffect(() => {
-    getSummoner(region, summonerName).then((res) => {
+    getAccount(region, username, tag).then((res) => {
       res = JSON.parse(res);
-      if (res.status) {
+      if (res.status && res.status !== 400) {
         navigate("/");
       }
-      setSummonerInfo(res);
+      getSummoner(region, res.puuid).then((res) => {
+        res = JSON.parse(res);
+        setSummonerInfo(res);
+      });
       getMasteryScore(region, res.puuid).then((res) => {
         res = JSON.parse(res);
-        if (res.status) {
+        if (res.status && res.status !== 400) {
           navigate("/");
         }
         setMasteryScore(res);
       });
-      getMastery(region, res.id).then((res) => {
+      getMastery(region, res.puuid).then((res) => {
         res = JSON.parse(res);
-        if (res.status) {
+        if (res.status && res.status !== 400) {
           navigate("/");
         }
         setSummonerMastery(res);
       });
       getMasterYourself(region).then((res) => {
         res = JSON.parse(res);
-        if (res.status) {
+        if (res.status && res.status !== 400) {
           navigate("/");
         }
         setMasterYourself(res);
       });
       getPlayerChallenges(region, res.puuid).then((res) => {
         res = JSON.parse(res);
-        if (res.status) {
+        if (res.status && res.status !== 400) {
           navigate("/");
         }
         if (res.challenges)
@@ -82,7 +86,7 @@ function Mastery() {
           );
       });
     });
-  }, [region, summonerName, navigate]);
+  }, [region, username, tag, navigate]);
 
   const MasteryGrid = () => {
     const championsByMasteryLevel = {

@@ -30,8 +30,8 @@ form > select {
   outline: none;
 }
 
-form > input {
-  width: 30rem;
+.username {
+  width: 22rem;
   height: 2rem;
 
   padding: 0px;
@@ -39,9 +39,27 @@ form > input {
   padding-right: 10px;
 
   margin: 0.2rem;
+  margin-right: 0rem;
 
   border: 1px solid black;
-  border-radius: 20px;
+  border-radius: 20px 0px 0px 20px;
+
+  outline: none;
+}
+
+.tag {
+  width: 8rem;
+  height: 2rem;
+
+  padding: 0px;
+  padding-left: 10px;
+  padding-right: 10px;
+
+  margin: 0.2rem;
+  margin-left: -1px;
+
+  border: 1px solid black;
+  border-radius: 0px 20px 20px 0px;
 
   outline: none;
 }
@@ -58,8 +76,12 @@ form > button:hover {
 }
 
 @media (max-width: 1024px) {
-  form > input {
-    width: 12rem;
+  .username {
+    width: 10rem;
+  }
+
+  .tag {
+    width: 5rem;
   }
 
   form > select {

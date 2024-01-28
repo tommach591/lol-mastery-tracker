@@ -1,11 +1,13 @@
 import "./Searchbar.css";
 import { useNavigate } from "react-router-dom";
-import { getSummoner } from "../../utils/League";
+import { getAccount } from "../../utils/League";
 import {
   useRegion,
   useSetRegion,
   useSetSummoner,
+  useSetTag,
   useSummoner,
+  useTag,
 } from "../../utils/PlayerContext";
 import { useCallback } from "react";
 
@@ -30,22 +32,25 @@ function Searchbar() {
   ];
 
   const navigate = useNavigate();
-  const summonerName = useSummoner();
-  const setSummonerName = useSetSummoner();
+  const username = useSummoner();
+  const setUsername = useSetSummoner();
+  const tag = useTag();
+  const setTag = useSetTag();
   const region = useRegion();
   const setRegion = useSetRegion();
 
   const handleSubmit = useCallback(() => {
-    getSummoner(region, summonerName).then((res) => {
+    getAccount(region, username, tag).then((res) => {
       const msg = JSON.parse(res);
       if (!msg.status) {
-        navigate(`/mastery/${region}/${summonerName}`);
-        setSummonerName("");
+        navigate(`/mastery/${region}/${username}/${tag}`);
+        setUsername("");
+        setTag("");
       } else {
-        alert("Summoner not found!");
+        alert("User not found!");
       }
     });
-  }, [region, summonerName, setSummonerName, navigate]);
+  }, [region, username, setUsername, tag, setTag, navigate]);
 
   return (
     <div className="Searchbar">
@@ -69,12 +74,22 @@ function Searchbar() {
           })}
         </select>
         <input
+          className="username"
           type="text"
           onChange={(event) => {
-            setSummonerName(event.currentTarget.value);
+            setUsername(event.currentTarget.value);
           }}
-          placeholder="Summoner name..."
-          value={summonerName}
+          placeholder="Username"
+          value={username}
+        />
+        <input
+          className="tag"
+          type="text"
+          onChange={(event) => {
+            setTag(event.currentTarget.value);
+          }}
+          placeholder="Tag"
+          value={tag}
         />
         <button type="search">
           <img

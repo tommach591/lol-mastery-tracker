@@ -9,9 +9,39 @@ import Grandmaster from "../assets/grandmaster.png";
 import Challenger from "../assets/challenger.png";
 
 const SERVER_URL = "https://lol-mastery-tracker.herokuapp.com/";
+// const SERVER_URL = "http://localhost:3001/";
 
-export function getSummoner(region, summonerName) {
-  return fetch(`${SERVER_URL}api/League/summoner/${region}/${summonerName}`)
+export function getAccount(region, username, tag) {
+  const europe = ["eun1", "euw1", "tr1", "ru"];
+  const asia = ["jp1", "kr"];
+
+  const reg = asia.includes(region)
+    ? "asia"
+    : europe.includes(region)
+    ? "europe"
+    : "americas";
+
+  return fetch(`${SERVER_URL}api/League/account/${reg}/${username}/${tag}`)
+    .then((res) => {
+      if (res.ok) {
+        return res.json();
+      } else return;
+    })
+    .catch((err) => console.error(err));
+}
+
+export function getSummoner(region, puuid) {
+  return fetch(`${SERVER_URL}api/League/summoner/${region}/${puuid}`)
+    .then((res) => {
+      if (res.ok) {
+        return res.json();
+      } else return;
+    })
+    .catch((err) => console.error(err));
+}
+
+export function getMastery(region, puuid) {
+  return fetch(`${SERVER_URL}api/League/mastery/${region}/${puuid}`)
     .then((res) => {
       if (res.ok) return res.json();
       else return;
@@ -19,17 +49,8 @@ export function getSummoner(region, summonerName) {
     .catch((err) => console.error(err));
 }
 
-export function getMastery(region, summonerID) {
-  return fetch(`${SERVER_URL}api/League/mastery/${region}/${summonerID}`)
-    .then((res) => {
-      if (res.ok) return res.json();
-      else return;
-    })
-    .catch((err) => console.error(err));
-}
-
-export function getMasteryScore(region, summonerID) {
-  return fetch(`${SERVER_URL}api/League/score/${region}/${summonerID}`)
+export function getMasteryScore(region, puuid) {
+  return fetch(`${SERVER_URL}api/League/score/${region}/${puuid}`)
     .then((res) => {
       if (res.ok) return res.json();
       else return;
