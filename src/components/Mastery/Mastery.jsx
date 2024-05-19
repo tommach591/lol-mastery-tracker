@@ -91,13 +91,6 @@ function Mastery() {
   const MasteryGrid = () => {
     const championsByMasteryLevel = {
       0: [],
-      1: [],
-      2: [],
-      3: [],
-      4: [],
-      5: [],
-      6: [],
-      7: [],
     };
 
     for (const c of champions) {
@@ -106,6 +99,8 @@ function Mastery() {
       );
 
       if (champion) {
+        if (!championsByMasteryLevel[champion.championLevel])
+          championsByMasteryLevel[champion.championLevel] = [];
         championsByMasteryLevel[champion.championLevel].push(
           <ChampionPortrait
             key={c.id}
@@ -129,18 +124,20 @@ function Mastery() {
 
     const ChampionGrids = [];
 
-    for (let i = 7; i >= 0; i--) {
-      if (championsByMasteryLevel[i].length > 0) {
+    for (const [level, championsInLevel] of Object.entries(
+      championsByMasteryLevel
+    )) {
+      if (championsInLevel.length > 0) {
         ChampionGrids.push(
-          <div className="MasteryLevel" key={i}>
-            <h1>{i > 0 ? `Mastery Level ${i}` : `Unranked`}</h1>
-            <div className="ChampionGrid">{championsByMasteryLevel[i]}</div>
+          <div className="MasteryLevel" key={level}>
+            <h1>{level > 0 ? `Mastery Level ${level}` : `Unranked`}</h1>
+            <div className="ChampionGrid">{championsInLevel}</div>
           </div>
         );
       }
     }
 
-    return ChampionGrids;
+    return ChampionGrids.reverse();
   };
 
   return summonerMastery ? (
